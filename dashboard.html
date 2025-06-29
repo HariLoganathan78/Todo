@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Todo App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="loadDashboard()">
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="welcome">👋 Welcome, <span id="userName"></span></div>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Task Form -->
+    <section class="task-form">
+      <input type="text" id="taskTitle" placeholder="Task title" />
+      <input type="date" id="taskDue" />
+      <select id="taskPriority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <select id="taskStatus">
+        <option value="in-progress" selected>In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+      <input type="email" id="taskShare" placeholder="Share with (email)" />
+      <button onclick="addTask()">Add Task</button>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+      <button onclick="filterTasks('all')">All</button>
+      <button onclick="filterTasks('today')">Due Today</button>
+      <button onclick="filterTasks('completed')">Completed</button>
+      <button onclick="filterTasks('in-progress')">In Progress</button>
+    </section>
+
+    <!-- Task List -->
+    <section id="taskList" class="task-list"></section>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>

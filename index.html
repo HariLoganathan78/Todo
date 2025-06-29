@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Katomaran Todo App</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDC0VQuJoH6IXqePR6MWAWfCnMNfn4cz0",
+      authDomain: "katomarantodoapp-11229.firebaseapp.com",
+      projectId: "katomarantodoapp-11229",
+      storageBucket: "katomarantodoapp-11229.appspot.com",
+      messagingSenderId: "905939998693",
+      appId: "1:905939998693:web:1ccdd173d842865b88010c",
+      measurementId: "G-CYJ1YZLG9B"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Welcome to Katomaran Todo App</h1>
+
+    <!-- New name input field -->
+    <input type="text" id="username" placeholder="Enter your name" />
+
+    <!-- Manual sign-in button -->
+    <button onclick="manualLogin()">Sign In</button>
+
+    <div class="social-buttons">
+      <button class="google-btn" onclick="loginWithGoogle()">
+        <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+        Sign in with Google
+      </button>
+
+      <button class="facebook-btn" disabled title="Not available">
+        <img src="https://img.icons8.com/color/48/facebook-new.png" alt="Facebook" />
+        Facebook Login (Disabled)
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const auth = firebase.auth();
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          localStorage.setItem("user", user.displayName);
+          localStorage.setItem("provider", "google");
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert("Google login failed: " + error.message);
+        });
+    }
+
+    function manualLogin() {
+      const username = document.getElementById("username").value.trim();
+      if (username === "") {
+        alert("Please enter your name.");
+        return;
+      }
+      localStorage.setItem("user", username);
+      localStorage.setItem("provider", "manual");
+      window.location.href = "dashboard.html";
+    }
+  </script>
+
+</body>
+</html>
