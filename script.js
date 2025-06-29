@@ -118,7 +118,7 @@ function editTask(id) {
   document.getElementById("taskStatus").value = task.status;
   document.getElementById("taskShare").value = task.sharedWith;
 
-  deleteTask(id); // will be re-added after editing
+  deleteTask(id); 
 }
 
 function clearForm() {
